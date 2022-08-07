@@ -1,27 +1,32 @@
+#Sudoku Solver.
+#Input sudoku board one line at a time to solve up to evil difficulty
+
+
 import numpy as np
-board=[]
+board=[] #create an empty array
 
 print('Sudoku Solver')
 print('')
 print("Input Board to solve. (Places 0's for empty spaces)")
 print('')
 
-c = 0
+#inputting values for each line
+c = 0 
 while c < 9:
     print('Input row', c+1, 'Enter each value with a space between them')
     val = list(map(int, input().split()))
     if len(val) == 9:
         board.append(val)
     else:
-        c -=1
+        c -=1 #decrement if list given is not valid
         print('You must have a number for each block')
         print('')
     c +=1
 
-np.reshape(board, (9,9))
+np.reshape(board, (9,9)) #reshape the array into a 9 by 9 board
         
 
-
+#drawing the board in terminal
 def print_board(su):
     for x in range(len(su)):
         if x%3 == 0 and x!=0:
@@ -34,7 +39,7 @@ def print_board(su):
             else:
                 print(str(su[x][y]) + " ",end="")
 
-
+#checking if a square is empty in the board
 def check_empty(su):
     for x in range(len(su)):
         for y in range(len(su[0])):
@@ -42,13 +47,13 @@ def check_empty(su):
                 return (x, y)
     return None
 
-
+#checking for duplicates
 def valid(su, num, pos):
     for x in range(len(su[0])):#checking row
-        if su[pos[0]][x] == num and pos[1]!= i:
+        if su[pos[0]][x] == num and pos[1]!= x:
             return False
     for y in range(len(su)):#checking column
-        if su[y][pos[1]] == num and pos[0]!= i:
+        if su[y][pos[1]] == num and pos[0]!= y:
             return False
 #checking 3 by 3 box
     box_x = pos[1]//3
@@ -59,7 +64,7 @@ def valid(su, num, pos):
                 return False
     return True
 
-
+#solving the board
 def solve(su):
     find = check_empty(su)
     if not find:
