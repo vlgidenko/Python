@@ -12,8 +12,9 @@ searchbox.submit()
 
 time.sleep(2)
 
-results = driver.find_elements(By.CSS_SELECTOR, ".s-result-item h2.a-size-mini")
+results = driver.find_elements(By.CSS_SELECTOR, ".s-result-item h2.a-size-mini") #gathers results from page
 
+#prints all results
 for result in results:
     print(result.text)
 
